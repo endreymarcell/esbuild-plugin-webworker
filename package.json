@@ -1,0 +1,13 @@
+{
+  "name": "esbuild-plugin-webworker-example",
+  "version": "1.0.0",
+  "main": "example/esbuild.js",
+  "author": "Marcell Endrey <endrey.marcell@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "bundle": "rm -rf example/bundle && node example/esbuild.js"
+  },
+  "devDependencies": {
+    "esbuild": "^0.9.2"
+  }
+}
