@@ -1,17 +1,31 @@
 # esbuild-plugin-webworker
 
-This is a naive attempt at writing a web worker plugin for esbuild. For context, see https://github.com/evanw/esbuild/issues/312  
+This is a naive attempt at writing a web worker plugin for esbuild, replicating the functionality of Webpack's [worker-loader](https://webpack.js.org/loaders/worker-loader/).
+For context, see https://github.com/evanw/esbuild/issues/312  
 
-## How to use the plugin
+__Disclaimer:__ this is just my personal attempt at solving this problem. I needed it to be able to use esbuild on a codebase that was written with Webpack in mind.  
 
-TODO
+## Usage
 
-## How to run the example
+Before:
+```javascript
+const worker = new Worker('./worker.js');
+worker.postMessage('something');
+```
 
+After:
+```javascript
+const CustomWorkerClass = require('./worker.js').default;
+const worker = new CustomWorkerClass();
+worker.postMessage('something');
+```
+
+## Example
+There is a working example included so that you can see how the plugin exactly works. To run it:
 ```bash
 cd example
-yarn
-yarn bundle
+yarn  # install esbuild
+yarn bundle  # bundle the code using esbuild
 python3 -m http.server  # or any other way of serving the files
-# open localhost:8000 in the browser
+open http://localhost:8000/  # or any other way to open localhost:8000 in a browser
 ```
