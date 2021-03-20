@@ -8,14 +8,13 @@ const webWorkerPlugin = {
         build.onResolve({ filter: /worker/ }, args => {
             console.debug(`The web worker plugin matched an import to ${args.path} from ${args.importer}`);
             return {
-                // This is a hack to pass the importer path to the onLoad handler
-                path: args.importer + '::' + args.path,
+                path: args.path,
                 namespace: 'webWorker',
+                pluginData: { importer: args.importer },
             };
         });
         build.onLoad({ filter: /.*/, namespace: 'webWorker' }, async args => {
-            const pathSegments = /^(.*)::(.*)$/.exec(args.path);
-            const [_, importer, importPath] = pathSegments;
+            const { path: importPath, pluginData: { importer } } = args;
 
             const workerWithFullPath = path.join(path.dirname(importer), importPath);
             const workerFileName = path.basename(workerWithFullPath);
