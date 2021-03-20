@@ -6,6 +6,7 @@ const webWorkerPlugin = {
     name: 'webWorker',
     setup(build) {
         build.onResolve({ filter: /worker/ }, args => {
+            // Feel free to remove this logline once you verify that the plugin works for your setup
             console.debug(`The web worker plugin matched an import to ${args.path} from ${args.importer}`);
             return {
                 path: args.path,
