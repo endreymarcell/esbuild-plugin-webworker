@@ -23,9 +23,8 @@ worker.postMessage('something');
 ## Example
 There is a working example included so that you can see how the plugin exactly works. To run it:
 ```bash
-cd example
 yarn  # install esbuild
 yarn bundle  # bundle the code using esbuild
-python3 -m http.server  # or any other way of serving the files
+python3 -m http.server --directory example  # or any other way of serving the files
 open http://localhost:8000/  # or any other way to open localhost:8000 in a browser
 ```
